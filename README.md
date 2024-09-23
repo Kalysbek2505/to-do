@@ -12,5 +12,7 @@
 - Django 4.x
 - Django REST Framework
 - PostgreSQL
+- Drf-Yasg
+  
 
 
