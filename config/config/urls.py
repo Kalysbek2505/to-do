@@ -16,11 +16,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from drf_yasg import openapi
+from django.conf import settings
+from django.conf.urls.static import static
+from drf_yasg.views import get_schema_view
 
 
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Change API",
+        description="...",
+        default_version="v1",
+    ),
+    public=True
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tasks.urls')),
+    path('docs/', schema_view.with_ui("swagger"))
 
 ]
+
+
+
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
